@@ -16,7 +16,27 @@
     <link rel="stylesheet" href="css/style.css">
 
 </head>
+
 <body>
+
+<!--JS -->
+<script>
+
+    window.addEventListener("load", async function(){
+                var options = {
+                method: 'GET',
+                mode: 'cors',
+            };
+
+            const varBusca = "wesley";
+            await fetch('http://localhost:8080/search/track?q=' + varBusca, options )
+                    .then((response) => response.json())
+                    .then((data) => console.log(data));
+        }
+    )
+
+
+</script>
     
 <!-- header section starts  -->
 
@@ -87,7 +107,7 @@
     <h1 class="heading"> nossos <span>canais</span> </h1>
 
     <div class="filter-buttons">
-        <div class="buttons" data-filter="arrivals">músicas</div>
+        <div class="buttons" data-filter="arrivals" onclick="searchTrack()">músicas</div>
         <div class="buttons" data-filter="featured">álbuns</div>
         <div class="buttons" data-filter="special">artistas</div>
         <div class="buttons" data-filter="seller">podcasts</div>
@@ -102,270 +122,6 @@
             </div>
             <div class="image">
                 <img src="https://e-cdns-images.dzcdn.net/images/artist/895c65537c74c2014b459f73e84bccb0/500x500-000000-80-0-0.jpg" alt="">
-            </div>
-            <div class="content">
-                <h3>$var_nome</h3>
-                <div class="price">
-                    <div class="offer">$var_nome</div>
-                </div>
-                <div class="stars">
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="far fa-star"></i>
-                    <span>(50)</span>
-                </div>
-            </div>
-        </div>
-
-        <div class="box" data-item="special">
-            <div class="icons">
-                                <a href="#" class="fas fa-heart"></a>
-                <a href="#" class="fas fa-play"></a>
-            </div>
-            <div class="image">
-                <img src="https://e-cdns-images.dzcdn.net/images/misc/703413adf47ad8a6001b438f7608a2be/500x500-000000-80-0-0.jpg" alt="">
-            </div>
-            <div class="content">
-                <h3>$var_nome</h3>
-                <div class="price">
-                    <div class="offer">$var_nome</div>
-                </div>
-                <div class="stars">
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="far fa-star"></i>
-                    <span>(50)</span>
-                </div>
-            </div>
-        </div>
-
-        <div class="box" data-item="seller">
-            <div class="icons">
-                                <a href="#" class="fas fa-heart"></a>
-                <a href="#" class="fas fa-play"></a>
-            </div>
-            <div class="image">
-                <img src="https://e-cdns-images.dzcdn.net/images/talk/ecfee0305dd9eedbd6526ace1253ee0d/500x500-000000-80-0-0.jpg" alt="">
-            </div>
-            <div class="content">
-                <h3>$var_nome</h3>
-                <div class="price">
-                    <div class="offer">$var_nome</div>
-                </div>
-                <div class="stars">
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="far fa-star"></i>
-                    <span>(50)</span>
-                </div>
-            </div>
-        </div>
-
-        <div class="box" data-item="arrivals">
-            <div class="icons">
-                                <a href="#" class="fas fa-heart"></a>
-                <a href="#" class="fas fa-play"></a>
-            </div>
-            <div class="image">
-                <img src="https://e-cdns-images.dzcdn.net/images/artist/f2bc007e9133c946ac3c3907ddc5d2ea/500x500-000000-80-0-0.jpg" alt="">
-            </div>
-            <div class="content">
-                <h3>$var_nome</h3>
-                <div class="price">
-                    <div class="offer">$var_nome</div>
-                </div>
-                <div class="stars">
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="far fa-star"></i>
-                    <span>(50)</span>
-                </div>
-            </div>
-        </div>
-
-        <div class="box" data-item="featured">
-            <div class="icons">
-                                <a href="#" class="fas fa-heart"></a>
-                <a href="#" class="fas fa-play"></a>
-            </div>
-            <div class="image">
-                <img src="https://e-cdns-images.dzcdn.net/images/cover/2e018122cb56986277102d2041a592c8/500x500-000000-80-0-0.jpg" alt="">
-            </div>
-            <div class="content">
-                <h3>$var_nome</h3>
-                <div class="price">
-                    <div class="offer">$var_nome</div>
-                </div>
-                <div class="stars">
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="far fa-star"></i>
-                    <span>(50)</span>
-                </div>
-            </div>
-        </div>
-
-        <div class="box" data-item="arrivals">
-            <div class="icons">
-                                <a href="#" class="fas fa-heart"></a>
-                <a href="#" class="fas fa-play"></a>
-            </div>
-            <div class="image">
-                <img src="image/product_img6.jpg" alt="">
-            </div>
-            <div class="content">
-                <h3>$var_nome</h3>
-                <div class="price">
-                    <div class="offer">$var_nome</div>
-                </div>
-                <div class="stars">
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="far fa-star"></i>
-                    <span>(50)</span>
-                </div>
-            </div>
-        </div>
-
-        <div class="box" data-item="special">
-            <div class="icons">
-                                <a href="#" class="fas fa-heart"></a>
-                <a href="#" class="fas fa-play"></a>
-            </div>
-            <div class="image">
-                <img src="image/product_img7.jpg" alt="">
-            </div>
-            <div class="content">
-                <h3>$var_nome</h3>
-                <div class="price">
-                    <div class="offer">$var_nome</div>
-                </div>
-                <div class="stars">
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="far fa-star"></i>
-                    <span>(50)</span>
-                </div>
-            </div>
-        </div>
-
-        <div class="box" data-item="seller">
-            <div class="icons">
-                                <a href="#" class="fas fa-heart"></a>
-                <a href="#" class="fas fa-play"></a>
-            </div>
-            <div class="image">
-                <img src="image/product_img8.jpg" alt="">
-            </div>
-            <div class="content">
-                <h3>$var_nome</h3>
-                <div class="price">
-                    <div class="offer">$var_nome</div>
-                </div>
-                <div class="stars">
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="far fa-star"></i>
-                    <span>(50)</span>
-                </div>
-            </div>
-        </div>
-
-        <div class="box" data-item="seller">
-            <div class="icons">
-                                <a href="#" class="fas fa-heart"></a>
-                <a href="#" class="fas fa-play"></a>
-            </div>
-            <div class="image">
-                <img src="image/product_img9.jpg" alt="">
-            </div>
-            <div class="content">
-                <h3>$var_nome</h3>
-                <div class="price">
-                    <div class="offer">$var_nome</div>
-                </div>
-                <div class="stars">
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="far fa-star"></i>
-                    <span>(50)</span>
-                </div>
-            </div>
-        </div>
-
-        <div class="box" data-item="featured">
-            <div class="icons">
-                                <a href="#" class="fas fa-heart"></a>
-                <a href="#" class="fas fa-play"></a>
-            </div>
-            <div class="image">
-                <img src="image/product_img10.jpg" alt="">
-            </div>
-            <div class="content">
-                <h3>$var_nome</h3>
-                <div class="price">
-                    <div class="offer">$var_nome</div>
-                </div>
-                <div class="stars">
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="far fa-star"></i>
-                    <span>(50)</span>
-                </div>
-            </div>
-        </div>
-
-        <div class="box" data-item="special">
-            <div class="icons">
-                                <a href="#" class="fas fa-heart"></a>
-                <a href="#" class="fas fa-play"></a>
-            </div>
-            <div class="image">
-                <img src="image/product_img11.jpg" alt="">
-            </div>
-            <div class="content">
-                <h3>$var_nome</h3>
-                <div class="price">
-                    <div class="offer">$var_nome</div>
-                </div>
-                <div class="stars">
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="far fa-star"></i>
-                    <span>(50)</span>
-                </div>
-            </div>
-        </div>
-
-        <div class="box" data-item="seller">
-            <div class="icons">
-                                <a href="#" class="fas fa-heart"></a>
-                <a href="#" class="fas fa-play"></a>
-            </div>
-            <div class="image">
-                <img src="image/product_img12.jpg" alt="">
             </div>
             <div class="content">
                 <h3>$var_nome</h3>
@@ -413,7 +169,7 @@
                 <a href="#" class="fas fa-play"></a>
                 </div>
                 <div class="image">
-                    <img src="image/product_img1.jpg" alt="">
+                    <img src="https://e-cdns-images.dzcdn.net/images/artist/4dbe00c7f3bc98b3b5ff4a8da02af87d/500x500-000000-80-0-0.jpg" alt="">
                 </div>
                 <div class="content">
                     <h3>$var_nome</h3>
@@ -430,127 +186,6 @@
                     </div>
                 </div>
             </div>
-
-            <div class="swiper-slide slide">
-                <div class="icons">
-                                    <a href="#" class="fas fa-heart"></a>
-                <a href="#" class="fas fa-play"></a>
-                </div>
-                <div class="image">
-                    <img src="image/product_img2.jpg" alt="">
-                </div>
-                <div class="content">
-                    <h3>$var_nome</h3>
-                    <div class="price">
-                        <div class="offer">$var_nome</div>
-                    </div>
-                    <div class="stars">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="far fa-star"></i>
-                        <span>(50)</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="swiper-slide slide">
-                <div class="icons">
-                                    <a href="#" class="fas fa-heart"></a>
-                <a href="#" class="fas fa-play"></a>
-                </div>
-                <div class="image">
-                    <img src="image/product_img3.jpg" alt="">
-                </div>
-                <div class="content">
-                    <h3>$var_nome</h3>
-                    <div class="price">
-                        <div class="offer">$var_nome</div>
-                    </div>
-                    <div class="stars">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="far fa-star"></i>
-                        <span>(50)</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="swiper-slide slide">
-                <div class="icons">
-                                    <a href="#" class="fas fa-heart"></a>
-                <a href="#" class="fas fa-play"></a>
-                </div>
-                <div class="image">
-                    <img src="image/product_img4.jpg" alt="">
-                </div>
-                <div class="content">
-                    <h3>$var_nome</h3>
-                    <div class="price">
-                        <div class="offer">$var_nome</div>
-                    </div>
-                    <div class="stars">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="far fa-star"></i>
-                        <span>(50)</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="swiper-slide slide">
-                <div class="icons">
-                                    <a href="#" class="fas fa-heart"></a>
-                <a href="#" class="fas fa-play"></a>
-                </div>
-                <div class="image">
-                    <img src="image/product_img5.jpg" alt="">
-                </div>
-                <div class="content">
-                    <h3>$var_nome</h3>
-                    <div class="price">
-                        <div class="offer">$var_nome</div>
-                    </div>
-                    <div class="stars">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="far fa-star"></i>
-                        <span>(50)</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="swiper-slide slide">
-                <div class="icons">
-                                    <a href="#" class="fas fa-heart"></a>
-                <a href="#" class="fas fa-play"></a>
-                </div>
-                <div class="image">
-                    <img src="image/product_img6.jpg" alt="">
-                </div>
-                <div class="content">
-                    <h3>$var_nome</h3>
-                    <div class="price">
-                        <div class="offer">$var_nome</div>
-                    </div>
-                    <div class="stars">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="far fa-star"></i>
-                        <span>(50)</span>
-                    </div>
-                </div>
-            </div>
-
         </div>
 
         <div class="swiper-button-next"></div>
