@@ -22,6 +22,7 @@
 <!--JS -->
 <script>
 
+    //Função de busca
     async function handleSearch(){
         const varBusca = document.getElementById('varBusca').value;
         console.log(varBusca);
@@ -34,8 +35,70 @@
          await fetch('http://localhost:8080/search/track?q=' + varBusca, getOptions )
                     .then((response) => response.json())
                     .then((data) => console.log(data));
+
+         await fetch('http://localhost:8080/search/album?q=' + varBusca, getOptions )
+                    .then((response) => response.json())
+                    .then((data) => console.log(data));
+
+         await fetch('http://localhost:8080/search/artist?q=' + varBusca, getOptions )
+                    .then((response) => response.json())
+                    .then((data) => console.log(data));
+
+         await fetch('http://localhost:8080/search/podcast?q=' + varBusca, getOptions )
+                    .then((response) => response.json())
+                    .then((data) => console.log(data));
     }
 
+
+    //Chamadas de Charts
+    async function handleTrackChart(){
+        const getOptions = {
+            method: 'GET',
+            mode: 'cors'
+        }
+
+         await fetch('http://localhost:8080/chart/track', getOptions )
+                    .then((response) => response.json())
+                    .then((data) => console.log(data));
+    }
+
+    async function handleAlbumChart(){
+        const getOptions = {
+            method: 'GET',
+            mode: 'cors'
+        }
+
+         await fetch('http://localhost:8080/chart/album', getOptions )
+                    .then((response) => response.json())
+                    .then((data) => console.log(data));
+    }
+
+    async function handleArtistChart(){
+        const getOptions = {
+            method: 'GET',
+            mode: 'cors'
+        }
+
+         await fetch('http://localhost:8080/chart/artist', getOptions )
+                    .then((response) => response.json())
+                    .then((data) => console.log(data));
+    }
+
+    async function handlePodcastChart(){
+        const getOptions = {
+            method: 'GET',
+            mode: 'cors'
+        }
+
+         await fetch('http://localhost:8080/chart/podcast', getOptions )
+                    .then((response) => response.json())
+                    .then((data) => console.log(data));
+    }
+
+    handleTrackChart();
+    handleAlbumChart();
+    handleArtistChart();
+    handlePodcastChart();
 
 
 </script>

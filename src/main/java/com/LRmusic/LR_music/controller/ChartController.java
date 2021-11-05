@@ -9,7 +9,7 @@ import java.util.List;
 
 @RequestMapping("/chart")
 @RestController
-@CrossOrigin(origins = "http://localhost:63343/")
+@CrossOrigin
 
 public class ChartController {
     @Autowired
