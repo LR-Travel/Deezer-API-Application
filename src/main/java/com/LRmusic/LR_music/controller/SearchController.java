@@ -12,7 +12,7 @@ import org.springframework.web.client.RestTemplate;
 
 @RequestMapping("/search")
 @RestController
-@CrossOrigin(origins = "http://localhost:63343/")
+@CrossOrigin(origins = "http://localhost:63342/")
 
 public class SearchController {
     @Autowired

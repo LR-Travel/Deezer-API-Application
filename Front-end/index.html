@@ -22,18 +22,20 @@
 <!--JS -->
 <script>
 
-    window.addEventListener("load", async function(){
-                var options = {
-                method: 'GET',
-                mode: 'cors',
-            };
+    async function handleSearch(){
+        const varBusca = document.getElementById('varBusca').value;
+        console.log(varBusca);
 
-            const varBusca = "wesley";
-            await fetch('http://localhost:8080/search/track?q=' + varBusca, options )
+        const getOptions = {
+            method: 'GET',
+            mode: 'cors'
+        }
+
+         await fetch('http://localhost:8080/search/track?q=' + varBusca, getOptions )
                     .then((response) => response.json())
                     .then((data) => console.log(data));
-        }
-    )
+    }
+
 
 
 </script>
@@ -58,8 +60,8 @@
     </div>
 
     <form action="" class="search-form">
-        <input type="search" name="" placeholder="search here..." id="search-box">
-        <label for="search-box" class="fas fa-search"></label>
+        <input type="search" placeholder="pesquise aqui..." id="varBusca">
+        <label for="varBusca" class="fas fa-search" onclick="handleSearch()"></label>
     </form>
 
 </header>
