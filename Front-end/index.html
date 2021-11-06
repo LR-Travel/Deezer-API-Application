@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     <link rel="shortcut icon" href="image/logo.jpg" type="image/x-icon" />
     <title>LR Music</title>
 
@@ -22,6 +25,12 @@
 <!--JS -->
 <script>
 
+    let tracks;
+    let albums;
+    let artists;
+    let podcasts;
+
+
     //Função de busca
     async function handleSearch(){
         const varBusca = document.getElementById('varBusca').value;
@@ -34,23 +43,156 @@
 
          await fetch('http://localhost:8080/search/track?q=' + varBusca, getOptions )
                     .then((response) => response.json())
-                    .then((data) => console.log(data));
+                    .then((data) => tracks = [...data.data])
+                    .then(() => renderTrackSearch());
 
          await fetch('http://localhost:8080/search/album?q=' + varBusca, getOptions )
                     .then((response) => response.json())
-                    .then((data) => console.log(data));
+                    .then((data) => albums = [...data.data]);
 
          await fetch('http://localhost:8080/search/artist?q=' + varBusca, getOptions )
                     .then((response) => response.json())
-                    .then((data) => console.log(data));
+                    .then((data) => artists = [...data.data]);
 
          await fetch('http://localhost:8080/search/podcast?q=' + varBusca, getOptions )
                     .then((response) => response.json())
-                    .then((data) => console.log(data));
+                    .then((data) => podcasts = [...data.data]);
     }
 
 
+    //Card HTML
+
+    function renderPodcastSearch(){
+        var podcast = "<div></div>";
+            for(var i = 1; i < 15; i++){
+            podcast += "<div class=\"box\" data-item=\"podcast\">";
+            podcast += "<div class=\"icons\">";
+            podcast += "<a href=\"#\" class=\"fas fa-heart\"></a>";
+            podcast += "<a href=\"#\" class=\"fas fa-play\"></a>";
+            podcast += "</div>";
+            podcast += "<div class=\"image\">";
+            podcast += "<img src="+ podcasts[i].picture_big +">";
+            podcast += "</div>";
+            podcast += "<div class=\"content\">";
+            podcast += "<div class=\"price\">";
+            podcast += "<div class=\"offer\">"+podcasts[i].title+"</div>";
+            podcast += "</div>";
+            podcast += "<div class=\"stars\">";
+            podcast += "<i class=\"fas fa-star\"></i>";
+            podcast += "<i class=\"fas fa-star\"></i>";
+            podcast += "<i class=\"fas fa-star\"></i>";
+            podcast += "<i class=\"fas fa-star\"></i>";
+            podcast += "<i class=\"far fa-star\"></i>";
+            podcast += "<span>(50)</span>";
+            podcast += "</div>";
+            podcast += "</div>";
+            podcast += "</div>";
+
+            $('.box-container').html(podcast);
+        }
+    }
+
+    function renderAlbumSearch(){
+    var album = "<div></div>";
+        for(var i = 1; i < 15; i++){
+        album += "<div class=\"box\" data-item=\"album\">";
+        album += "<div class=\"icons\">";
+        album += "<a href=\"#\" class=\"fas fa-heart\"></a>";
+        album += "<a href=\"#\" class=\"fas fa-play\"></a>";
+        album += "</div>";
+        album += "<div class=\"image\">";
+        album += "<img src="+ albums[i].cover_big +">";
+        album += "</div>";
+        album += "<div class=\"content\">";
+        album += "<h3>"+albums[i].title+"</h3>";
+        album += "<div class=\"price\">";
+        album += "<div class=\"offer\">"+albums[i].artist.name+"</div>";
+        album += "</div>";
+        album += "<div class=\"stars\">";
+        album += "<i class=\"fas fa-star\"></i>";
+        album += "<i class=\"fas fa-star\"></i>";
+        album += "<i class=\"fas fa-star\"></i>";
+        album += "<i class=\"fas fa-star\"></i>";
+        album += "<i class=\"far fa-star\"></i>";
+        album += "<span>(50)</span>";
+        album += "</div>";
+        album += "</div>";
+        album += "</div>";
+
+        $('.box-container').html(album);
+    }
+}
+
+    function renderArtistSearch(){
+    var artist = "<div></div>";
+        for(var i = 1; i < 15; i++){
+        artist += "<div class=\"box\" data-item=\"artist\">";
+        artist += "<div class=\"icons\">";
+        artist += "<a href=\"#\" class=\"fas fa-heart\"></a>";
+        artist += "<a href=\"#\" class=\"fas fa-play\"></a>";
+        artist += "</div>";
+        artist += "<div class=\"image\">";
+        artist += "<img src="+ artists[i].picture_big +">";
+        artist += "</div>";
+        artist += "<div class=\"content\">";
+        artist += "<div class=\"price\">";
+        artist += "<div class=\"offer\">"+artists[i].name+"</div>";
+        artist += "</div>";
+        artist += "<div class=\"stars\">";
+        artist += "<i class=\"fas fa-star\"></i>";
+        artist += "<i class=\"fas fa-star\"></i>";
+        artist += "<i class=\"fas fa-star\"></i>";
+        artist += "<i class=\"fas fa-star\"></i>";
+        artist += "<i class=\"far fa-star\"></i>";
+        artist += "<span>(50)</span>";
+        artist += "</div>";
+        artist += "</div>";
+        artist += "</div>";
+
+        $('.box-container').html(artist);
+    }
+}
+
+
+    function renderTrackSearch(){
+        var track = "<div></div>";
+        for(var i = 1; i < 15; i++){
+            track += "<div class=\"box\" data-item=\"track\">";
+            track += "<div class=\"icons\">";
+            track += "<a href=\"#\" class=\"fas fa-heart\"></a>";
+            track += "<a href=\"#\" class=\"fas fa-play\"></a>";
+            track += "</div>";
+            track += "<div class=\"image\">";
+            track += "<img src="+ tracks[i].album.cover_big +">";
+            track += "</div>";
+            track += "<div class=\"content\">";
+            track += "<h3>"+tracks[i].title_short+"</h3>";
+            track += "<div class=\"price\">";
+            track += "<div class=\"offer\">"+tracks[i].artist.name+"</div>";
+            track += "</div>";
+            track += "<div class=\"stars\">";
+            track += "<i class=\"fas fa-star\"></i>";
+            track += "<i class=\"fas fa-star\"></i>";
+            track += "<i class=\"fas fa-star\"></i>";
+            track += "<i class=\"fas fa-star\"></i>";
+            track += "<i class=\"far fa-star\"></i>";
+            track += "<span>(50)</span>";
+            track += "</div>";
+            track += "</div>";
+            track += "</div>";
+
+            $('.box-container').html(track);
+        }
+    }
     //Chamadas de Charts
+
+    let trackChart;
+    let albumChart;
+    let artistChart;
+    let podcastChart;
+
+
+    //Track Chart Function
     async function handleTrackChart(){
         const getOptions = {
             method: 'GET',
@@ -59,9 +201,13 @@
 
          await fetch('http://localhost:8080/chart/track', getOptions )
                     .then((response) => response.json())
-                    .then((data) => console.log(data));
+                    .then((data) => trackChart = [...data.data])
+                    .then((data) => renderTrackChart());
+
     }
 
+
+    //Album Chart Function
     async function handleAlbumChart(){
         const getOptions = {
             method: 'GET',
@@ -70,9 +216,12 @@
 
          await fetch('http://localhost:8080/chart/album', getOptions )
                     .then((response) => response.json())
-                    .then((data) => console.log(data));
+                    .then((data) => albumChart = [...data.data])
+                    .then((data) => renderAlbumChart());
     }
 
+
+    //Artist Chart Function
     async function handleArtistChart(){
         const getOptions = {
             method: 'GET',
@@ -81,9 +230,12 @@
 
          await fetch('http://localhost:8080/chart/artist', getOptions )
                     .then((response) => response.json())
-                    .then((data) => console.log(data));
+                    .then((data) => artistChart = [...data.data])
+                    .then((data) => renderArtistChart());
     }
 
+
+    //Podcast Chart Function
     async function handlePodcastChart(){
         const getOptions = {
             method: 'GET',
@@ -92,7 +244,8 @@
 
          await fetch('http://localhost:8080/chart/podcast', getOptions )
                     .then((response) => response.json())
-                    .then((data) => console.log(data));
+                    .then((data) => podcastChart = [...data.data])
+                    .then((data) => renderPodcastChart());
     }
 
     handleTrackChart();
@@ -100,9 +253,137 @@
     handleArtistChart();
     handlePodcastChart();
 
+    function renderTrackChart(){
+        let track = "<div></div>";
+        for (var i = 0; i < 10; i++){
+               track += "<div class=\"swiper-slide slide\">";
+                    track += "<div class=\"icons\">";
+                        track += "<a href=\"#\">"+[i+1]+"º</a>";
+                        track += "<a href=\"#\" class=\"fas fa-play\"></a>";
+                    track += "</div>";
+                    track += "<div class=\"image\">";
+                        track += "<img src="+trackChart[i].album.cover_big+">";
+                    track += "</div>";
+                    track += "<div class=\"content\">";
+                        track += "<h3>"+trackChart[i].title_short+"</h3>";
+                        track += "<div class=\"price\">";
+                            track += "<div class=\"offer\">"+trackChart[i].artist.name+"</div>";
+                        track += "</div>";
+                        track += "<div class=\"stars\">";
+                            track += "<i class=\"fas fa-star\"></i>";
+                            track += "<i class=\"fas fa-star\"></i>";
+                            track += "<i class=\"fas fa-star\"></i>";
+                            track += "<i class=\"fas fa-star\"></i>";
+                            track += "<i class=\"fas fa-star\"></i>";
+                            track += "<span>(50)</span>";
+                        track += "</div>";
+                    track += "</div>";
+                track += "</div>";
+
+                $('#carrosel-track').html(track);
+
+        }
+    }
+
+    function renderAlbumChart(){
+        let album = "<div></div>";
+        for (var i = 0; i < 10; i++){
+               album += "<div class=\"swiper-slide slide\">";
+                    album += "<div class=\"icons\">";
+                        album += "<a href=\"#\">"+[i+1]+"º</a>";
+                        album += "<a href=\"#\" class=\"fas fa-play\"></a>";
+                    album += "</div>";
+                    album += "<div class=\"image\">";
+                        album += "<img src="+albumChart[i].cover_big+">";
+                    album += "</div>";
+                    album += "<div class=\"content\">";
+                        album += "<h3>"+albumChart[i].title+"</h3>";
+                        album += "<div class=\"price\">";
+                            album += "<div class=\"offer\">"+albumChart[i].artist.name+"</div>";
+                        album += "</div>";
+                        album += "<div class=\"stars\">";
+                            album += "<i class=\"fas fa-star\"></i>";
+                            album += "<i class=\"fas fa-star\"></i>";
+                            album += "<i class=\"fas fa-star\"></i>";
+                            album += "<i class=\"fas fa-star\"></i>";
+                            album += "<i class=\"fas fa-star\"></i>";
+                            album += "<span>(50)</span>";
+                        album += "</div>";
+                    album += "</div>";
+                album += "</div>";
+
+                $('#carrosel-album').html(album);
+
+        }
+    }
+
+    function renderArtistChart(){
+        let artist = "<div></div>";
+        for (var i = 0; i < 10; i++){
+               artist += "<div class=\"swiper-slide slide\">";
+                    artist += "<div class=\"icons\">";
+                        artist += "<a href=\"#\">"+[i+1]+"º</a>";
+                        artist += "<a href=\"#\" class=\"fas fa-play\"></a>";
+                    artist += "</div>";
+                    artist += "<div class=\"image\">";
+                        artist += "<img src="+artistChart[i].picture_big+">";
+                    artist += "</div>";
+                    artist += "<div class=\"content\">";
+                        artist += "<div class=\"price\">";
+                            artist += "<div class=\"offer\">"+artistChart[i].name+"</div>";
+                        artist += "</div>";
+                        artist += "<div class=\"stars\">";
+                            artist += "<i class=\"fas fa-star\"></i>";
+                            artist += "<i class=\"fas fa-star\"></i>";
+                            artist += "<i class=\"fas fa-star\"></i>";
+                            artist += "<i class=\"fas fa-star\"></i>";
+                            artist += "<i class=\"fas fa-star\"></i>";
+                            artist += "<span>(50)</span>";
+                        artist += "</div>";
+                    artist += "</div>";
+                artist += "</div>";
+
+                $('#carrosel-artist').html(artist);
+
+        }
+    }
+
+    function renderPodcastChart(){
+        let podcast = "<div></div>";
+        for (var i = 0; i < 10; i++){
+               podcast += "<div class=\"swiper-slide slide\">";
+                    podcast += "<div class=\"icons\">";
+                        podcast += "<a href=\"#\">"+[i+1]+"º</a>";
+                        podcast += "<a href=\"#\" class=\"fas fa-play\"></a>";
+                    podcast += "</div>";
+                    podcast += "<div class=\"image\">";
+                        podcast += "<img src="+podcastChart[i].picture_big+">";
+                    podcast += "</div>";
+                    podcast += "<div class=\"content\">";
+                        podcast += "<div class=\"price\">";
+                            podcast += "<div class=\"offer\">"+podcastChart[i].title+"</div>";
+                        podcast += "</div>";
+                        podcast += "<div class=\"stars\">";
+                            podcast += "<i class=\"fas fa-star\"></i>";
+                            podcast += "<i class=\"fas fa-star\"></i>";
+                            podcast += "<i class=\"fas fa-star\"></i>";
+                            podcast += "<i class=\"fas fa-star\"></i>";
+                            podcast += "<i class=\"fas fa-star\"></i>";
+                            podcast += "<span>(50)</span>";
+                        podcast += "</div>";
+                    podcast += "</div>";
+                podcast += "</div>";
+
+                $('#carrosel-podcast').html(podcast);
+
+        }
+    }
+
+
+
 
 </script>
-    
+
 <!-- header section starts  -->
 
 <header class="header">
@@ -172,37 +453,13 @@
     <h1 class="heading"> nossos <span>canais</span> </h1>
 
     <div class="filter-buttons">
-        <div class="buttons" data-filter="arrivals" onclick="searchTrack()">músicas</div>
-        <div class="buttons" data-filter="featured">álbuns</div>
-        <div class="buttons" data-filter="special">artistas</div>
-        <div class="buttons" data-filter="seller">podcasts</div>
+        <div class="buttons"><label onclick="renderTrackSearch()">músicas</label></div>
+        <div class="buttons"><label onclick="renderAlbumSearch()">álbuns</label></div>
+        <div class="buttons"><label onclick="renderArtistSearch()">artistas</label></div>
+        <div class="buttons"><label onclick="renderPodcastSearch()">podcasts</label></div>
     </div>
 
     <div class="box-container">
-
-        <div class="box" data-item="featured">
-            <div class="icons">
-                                <a href="#" class="fas fa-heart"></a>
-                <a href="#" class="fas fa-play"></a>
-            </div>
-            <div class="image">
-                <img src="https://e-cdns-images.dzcdn.net/images/artist/895c65537c74c2014b459f73e84bccb0/500x500-000000-80-0-0.jpg" alt="">
-            </div>
-            <div class="content">
-                <h3>$var_nome</h3>
-                <div class="price">
-                    <div class="offer">$var_nome</div>
-                </div>
-                <div class="stars">
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="fas fa-star"></i>
-                    <i class="far fa-star"></i>
-                    <span>(50)</span>
-                </div>
-            </div>
-        </div>
 
     </div>
 
@@ -215,50 +472,64 @@
 
 <section class="featured" id="featured">
 
-    <h1 class="heading"> <span>mais</span> ouvidos </h1>
-
-    <div class="filter-buttons">
-        <div class="buttons active" data-filter="all">músicas</div>
-        <div class="buttons" data-filter="arrivals">artistas</div>
-        <div class="buttons" data-filter="featured">álbuns</div>
-        <div class="buttons" data-filter="seller">podcasts</div>
-    </div>
+    <h1 class="heading"> <span>top 10 </span>músicas mais ouvidas </h1>
 
     <div class="swiper featured-slider">
-        
-        <div class="swiper-wrapper">
+        <div class="swiper-wrapper" id="carrosel-track">
 
-            <div class="swiper-slide slide">
-                <div class="icons">
-                                    <a href="#" class="fas fa-heart"></a>
-                <a href="#" class="fas fa-play"></a>
-                </div>
-                <div class="image">
-                    <img src="https://e-cdns-images.dzcdn.net/images/artist/4dbe00c7f3bc98b3b5ff4a8da02af87d/500x500-000000-80-0-0.jpg" alt="">
-                </div>
-                <div class="content">
-                    <h3>$var_nome</h3>
-                    <div class="price">
-                        <div class="offer">$var_nome</div>
-                    </div>
-                    <div class="stars">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="far fa-star"></i>
-                        <span>(50)</span>
-                    </div>
-                </div>
-            </div>
         </div>
 
         <div class="swiper-button-next"></div>
         <div class="swiper-button-prev"></div>
-
     </div>
 
 </section>
+
+<section class="featured" id="featured">
+
+    <h1 class="heading"> <span>top 10 </span>álbuns mais ouvidos </h1>
+
+    <div class="swiper featured-slider">
+        <div class="swiper-wrapper" id="carrosel-album">
+
+        </div>
+
+        <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev"></div>
+    </div>
+
+</section>
+
+<section class="featured" id="featured">
+
+    <h1 class="heading"> <span>top 10 </span>artistas mais ouvidos </h1>
+
+    <div class="swiper featured-slider">
+        <div class="swiper-wrapper" id="carrosel-artist">
+
+        </div>
+
+        <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev"></div>
+    </div>
+
+</section>
+
+<section class="featured" id="featured">
+
+    <h1 class="heading"> <span>top 10 </span>podcasts mais ouvidos </h1>
+
+    <div class="swiper featured-slider">
+        <div class="swiper-wrapper" id="carrosel-podcast">
+
+        </div>
+
+        <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev"></div>
+    </div>
+
+</section>
+
 
 <!-- featured section ends -->
 
@@ -331,7 +602,7 @@
     </div>
 
     <div class="credit"> &copy; copyright - 2021 by <span>LR DevOps</span> </div>
-    
+
 </section>
 
 <!-- footer section ends -->
